@@ -1,0 +1,108 @@
+here i just paste the terminal code that i performed on mongodb shell 
+aamod@aamod-Inspiron-5570:/media/aamod/F27A774B7A770B9B/nodejs/node_for_web/node-web-module$ mongosh
+Current Mongosh Log ID: 68caf4ce8992fac577ce5f46
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.5.8
+Using MongoDB:          6.0.26
+Using Mongosh:          2.5.8
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2025-09-17T14:57:52.651+05:45: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2025-09-17T14:57:53.447+05:45: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> db.createCollection("student")
+{ ok: 1 }
+test> use school
+switched to db school
+school> db.createCollection("student")
+{ ok: 1 }
+school> db.students.insertOne({ name: "Aamod", roll: 1, ssemester: 6 })
+... db.students.insertMany([
+...   { name: "Ravi", roll: 2, semester: 6 },
+...   { name: "Anita", roll: 3, semester: 5 }
+... ])
+... 
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('68caf53a8992fac577ce5f48'),
+    '1': ObjectId('68caf53a8992fac577ce5f49')
+  }
+}
+school> db.students.find()
+[
+  {
+    _id: ObjectId('68cade3a5d5c089829ce5f47'),
+    name: 'Aamod',
+    roll: 1,
+    semester: 6
+  },
+  {
+    _id: ObjectId('68caf1445d5c089829ce5f48'),
+    name: 'Ravi',
+    roll: 2,
+    semester: 6
+  },
+  {
+    _id: ObjectId('68caf53a8992fac577ce5f47'),
+    name: 'Aamod',
+    roll: 1,
+    semester: 6
+  },
+  {
+    _id: ObjectId('68caf53a8992fac577ce5f48'),
+    name: 'Ravi',
+    roll: 2,
+    semester: 6
+  },
+  {
+    _id: ObjectId('68caf53a8992fac577ce5f49'),
+    name: 'Anita',
+    roll: 3,
+    semester: 5
+  }
+]
+school> db.students.find({ semester: 6 })  
+[
+  {
+    _id: ObjectId('68cade3a5d5c089829ce5f47'),
+    name: 'Aamod',
+    roll: 1,
+    semester: 6
+  },
+  {
+    _id: ObjectId('68caf1445d5c089829ce5f48'),
+    name: 'Ravi',
+    roll: 2,
+    semester: 6
+  },
+  {
+    _id: ObjectId('68caf53a8992fac577ce5f47'),
+    name: 'Aamod',
+    roll: 1,
+    semester: 6
+  },
+  {
+    _id: ObjectId('68caf53a8992fac577ce5f48'),
+    name: 'Ravi',
+    roll: 2,
+    semester: 6
+  }
+]
+school> db.students.updateOne(
+...   { roll: 1 },
+...   { $set: { semester: 7 } }
+... )
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+school> db.students.deleteOne({ roll: 3 })
+{ acknowledged: true, deletedCount: 1 }
+school> 
