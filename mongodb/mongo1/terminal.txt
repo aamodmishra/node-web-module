@@ -106,3 +106,6 @@ school> db.students.updateOne(
 school> db.students.deleteOne({ roll: 3 })
 { acknowledged: true, deletedCount: 1 }
 school> 
+
+
+in this way we can run mongoshell in terminal 
